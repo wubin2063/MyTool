@@ -2,14 +2,15 @@
 #include "ThreadPool.h"
 
 // 一个示例函数，计算给定数字的平方
-int square(int x) {
+int square(const int &x) {
     return x * x;
 }
 
 int main() {
     // 创建线程池，使用4个工作线程
     ThreadPool pool(4);
-
+    double d = square(2);
+    std::cout  << d << std::endl;
     // 创建一个 vector 以保存任务的结果
     std::vector<std::future<int>> results;
 

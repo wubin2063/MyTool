@@ -14,5 +14,5 @@ int main()
     // 延时功能
     timer.DelayMicroseconds(500);
 
-    return 0; //conflict test
+    return 1; //conflict test
 }

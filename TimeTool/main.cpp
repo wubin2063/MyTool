@@ -15,5 +15,4 @@ int main()
     timer.DelayMicroseconds(500);
 
     return 0;
-    //test1
 }

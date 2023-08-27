@@ -14,6 +14,6 @@ int main()
     // 延时功能
     timer.DelayMicroseconds(500);
 
-    return 1; //conflict 9est2
+    return 3; //conflict 9est2
     //test1
 }

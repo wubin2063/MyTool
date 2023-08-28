@@ -1,0 +1,5 @@
+/.idea
+/CsvFileTool/cmake-build-debug
+/IniReader/cmake-build-debug
+/ThreadPool/cmake-build-debug
+/TimeTool/cmake-build-debug

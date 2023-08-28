@@ -11,7 +11,7 @@ using std::string;
 */
 void TimerTool::StartMeasure()
 {
-    start_time = std::chrono::steady_clock::now();
+    m_start_time = std::chrono::steady_clock::now();
 }
 
 /**
@@ -23,12 +23,12 @@ void TimerTool::StartMeasure()
 double TimerTool::StopMeasure(const string &strName)
 {
     auto end_time = std::chrono::steady_clock::now();
-    auto duration = std::chrono::duration<double, std::micro>(end_time - start_time).count();
+    auto duration = std::chrono::duration<double, std::micro>(end_time - m_start_time).count();
     double milliseconds = duration / 1000.0;
 
     std::cout << "Time elapsed: " << milliseconds << " ms" << std::endl;
     m_mapTimeRecords[strName].push_back(milliseconds);
-    start_time = std::chrono::steady_clock::now();
+    m_start_time = std::chrono::steady_clock::now();
 
     return milliseconds;
 }
@@ -45,7 +45,7 @@ void TimerTool::DelayMicroseconds(double microseconds)
     {
         auto current_time = std::chrono::steady_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(current_time - start_time).count();
-        if (duration >= microseconds)
+        if (static_cast<double>(duration) >= microseconds)
         {
             break;
         }
@@ -69,4 +69,16 @@ std::map<std::string, std::vector<double>> TimerTool::GetTimeRecords()
 void TimerTool::ClearTimeRecords()
 {
     m_mapTimeRecords.clear();
+}
+
+std::string TimerTool::GetCurrentTime(const std::string& format) {
+    // 获取当前时间戳
+    std::time_t currentTime;
+    std::time(&currentTime);
+
+    // 将时间戳转换为字符串形式
+    char timestampStr[20]; // 20 字符足以容纳时间戳
+    std::strftime(timestampStr, sizeof(timestampStr), format.c_str(), std::localtime(&currentTime));
+
+    return std::string(timestampStr);
 }
